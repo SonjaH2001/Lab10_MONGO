@@ -26,10 +26,10 @@ var mongo_pw = process.env.MONGO_PW;
 var url = 'mongodb://localhost:27017/todo';
 MongoClient.connect(url, function(err, db){
   console.log('Errors?' + err);
-  assert(!err);
+  assert(!err); //crash if error connectin
 
   app.use(function(req, res, next) {
-      req.task_col = db.collection('tasks');
+      req.task_col = db.collection('tasks');//this gets the "tasks" collection to routes
       next();
   })
 

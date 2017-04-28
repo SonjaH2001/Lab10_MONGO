@@ -70,16 +70,19 @@ router.post('/add', function(req, res, next){
 /* Mark a task as done. Task _id should be provided as body parameter */
 router.post('/done', function(req, res, next){
 
-    req.task_col.updateOne({ _id : ObjectID(req.body._id) }, {$set : { completed : true }}, function(err, result){
+    req.task_col.updateOne(
+        { _id : ObjectID(req.body._id) },
+        {$set : { completed : true }},
+        function(err, result){
 
         if (err) {
             return next(err);    // For database errors, 500 error
         }
 
-        if (result.result.n == 0) {
+        if (result.result.n == 0) { //see how many docs were updated
             var req_err = new Error('Task not found');
             req_err.status = 404;
-            return next(req_err);     // Task not found error
+            return next(req_err);     // Task not found in DB, error
         }
 
         req.flash('info', 'Marked as completed');
