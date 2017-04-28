@@ -29,9 +29,11 @@ router.get('/completed', function(req, res, next){
 
 
 /* Mark a task as done. Task _id should be provided as a body parameter */
-router.post('tasks/alldone', function(req, res, next){
+router.post('/alldone', function(req, res, next){
 
-    req.task_col.updateMany( {completed:false}, { $set: {completed : true}}, function(err, result) {
+    req.task_col.updateMany(
+        {completed:false},
+        { $set: {completed : true}}, function(err, result) {
 
         if (err) {
             return next(err);

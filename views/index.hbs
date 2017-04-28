@@ -17,7 +17,6 @@
 <div class="tasklist">
 
     {{#each tasks}}
-
         <p>{{@index}}: {{this.text}}</p>
 
         <form class="done_form" action="/done" method="POST">
@@ -42,7 +41,7 @@
 
     {{#if tasks}}
 
-        <form action="/alldone" method="POST">
+        <form action="alldone" method="POST">
             <input class="all_done_button" type="submit" value="All done!">
         </form>
 
